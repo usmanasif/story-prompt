@@ -23,7 +23,7 @@ ruby -v
 
 Clone this repo and open it in terminal.
 ```
-git clone
+git clone https://github.com/usmanasif/story-prompt.git
 ```
 
 ### Help
