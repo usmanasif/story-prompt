@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'optparse'
 require 'json'
+require_relative './../lib/story_prompt'
 
 ARGV << '-h' if ARGV.empty?
 OPTIONS = {}
@@ -27,10 +28,10 @@ case
 when OPTIONS[:help]
   puts message
 when OPTIONS[:stat]
-  puts 'stats'
+  StoryPrompt.fetch_stats
 else
   if valid_json?(ARGV.first)
-    puts ARGV
+    StoryPrompt.generate_prompt ARGV.first
   else
     puts message << "\n\n Invalid JSON input"
   end

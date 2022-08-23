@@ -6,7 +6,7 @@ module StoryPrompt
     end
 
     def story
-      if valid_keys? || validate_input?
+      if valid_keys? and validate_input?
         save_input_data
         puts "One day Anna was walking her #{@data['NUMBER']} #{@data['UNIT_OF_MEASURE']} commute to #{@data['PLACE']} and found a #{@data['ADJECTIVE']} #{@data['NOUN']} on the ground."
       else
