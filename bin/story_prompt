@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'json'
+
+ARGV << '-h' if ARGV.empty?
+OPTIONS = {}
+
+message = "WELCOME TO STORY PROMPT GENERATOR
+  Usage: ./bin/story_prompt '{ \"NUMBER\": \"1\", \"UNIT_OF_MEASURE\": \"mile\", \"PLACE\": \"work\", \"ADJECTIVE\": \"blue\", \"NOUN\": \"rock\" }'
+  * ./bin/story_prompt <JSON>  Add values as json from example above or copy paste the helping string. It generates story prompt.
+  * ./bin/story_prompt -s Genrate Statistics
+  * ./bin/story_prompt -h Displays Help commands"
+
+
+def valid_json?(string)
+  !!JSON.parse(string)
+rescue JSON::ParserError
+  false
+end
+
+OptionParser.new do |parser|
+  parser.on("-s", "--stat", "Generate statistics") { |o| OPTIONS[:stat] = o }
+  parser.on("-h", "--help", "Help commands") { |o| OPTIONS[:help] = o }
+end.parse!
+
+case
+when OPTIONS[:help]
+  puts message
+when OPTIONS[:stat]
+  puts 'stats'
+else
+  if valid_json?(ARGV.first)
+    puts ARGV
+  else
+    puts message << "\n\n Invalid JSON input"
+  end
+end
